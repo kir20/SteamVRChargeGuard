@@ -4,6 +4,8 @@
 
 **⬇ [Download SteamVRChargeGuard.exe](https://github.com/kir20/SteamVRChargeGuard/releases/latest)** (Windows 10/11, SteamVR)
 
+> 🤖 이 프로젝트의 코드와 문서는 Claude(Claude Code)로 작성했습니다. / The code and documentation of this project were written with Claude (Claude Code). / このプロジェクトのコードとドキュメントは Claude（Claude Code）で作成しました。
+
 ## 한국어
 
 컨트롤러나 트래커를 **충전하려고 케이블을 꽂았을 뿐인데 SteamVR이 켜지는** 문제를 막아 줍니다.
