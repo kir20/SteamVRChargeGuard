@@ -25,7 +25,7 @@ namespace ChargeGuard
         {
             ["ko"] = new Dictionary<string, string>
             {
-                ["desc"] = "충전 케이블을 꽂아서 컨트롤러·트래커가 켜졌을 때는 SteamVR이 자동으로 켜지지 않게 하고, " +
+                ["desc"] = "GripVR처럼 충전 케이블을 꽂으면 저절로 켜지는 기기가 충전 중에 켜졌을 때는 SteamVR이 자동으로 켜지지 않게 하고, " +
                            "전원 버튼으로 켜거나 충전 케이블을 뽑았을 때만 SteamVR을 자동으로 켭니다.\n\n" +
                            "설치하면 Steam 자체의 자동 실행 기능을 끄고, 이 프로그램이 Windows 로그인 때마다 " +
                            "백그라운드에서 실행되어 대신 판단합니다.",
@@ -55,7 +55,7 @@ namespace ChargeGuard
             },
             ["ja"] = new Dictionary<string, string>
             {
-                ["desc"] = "充電ケーブルを挿してコントローラー・トラッカーの電源が入ったときは SteamVR を自動で起動せず、" +
+                ["desc"] = "GripVR のように充電ケーブルを挿すと電源が入るデバイスが充電中にオンになったときは SteamVR を自動で起動せず、" +
                            "電源ボタンで起動したときや充電ケーブルを抜いたときだけ SteamVR を自動で起動します。\n\n" +
                            "インストールすると Steam 自体の自動起動機能をオフにし、このプログラムが Windows " +
                            "ログイン時にバックグラウンドで動作して代わりに判断します。",
@@ -85,8 +85,8 @@ namespace ChargeGuard
             },
             ["en"] = new Dictionary<string, string>
             {
-                ["desc"] = "Stops SteamVR from starting when a controller or tracker switches on because you plugged it in to " +
-                           "charge, and starts SteamVR only when you turn a device on with its power button or unplug it " +
+                ["desc"] = "Stops SteamVR from starting when a device that switches itself on from the charger (like GripVR) " +
+                           "powers up while charging, and starts SteamVR only when you turn a device on with its power button or unplug it " +
                            "from the charger.\n\n" +
                            "Installing turns off Steam's own auto-launch and runs this program in the background at every " +
                            "Windows sign-in to make that decision instead.",

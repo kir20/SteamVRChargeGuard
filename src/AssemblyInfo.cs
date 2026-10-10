@@ -2,7 +2,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("SteamVR Charge Guard")]
-[assembly: AssemblyDescription("Stops SteamVR from auto-launching when a controller or tracker powers on from charging")]
+[assembly: AssemblyDescription("Stops SteamVR from auto-launching when a device that powers on from the charger (like GripVR) does so")]
 [assembly: AssemblyCompany("kir20")]
 [assembly: AssemblyProduct("SteamVR Charge Guard")]
 [assembly: AssemblyCopyright("Copyright (c) 2026 kir20. MIT License.")]

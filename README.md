@@ -8,7 +8,7 @@
 
 ## 한국어
 
-컨트롤러나 트래커를 **충전하려고 케이블을 꽂았을 뿐인데 SteamVR이 켜지는** 문제를 막아 줍니다.
+GripVR처럼 충전 케이블을 꽂으면 저절로 켜지는 기기 때문에 **충전만 하려 해도 SteamVR이 켜지는** 문제를 막아 줍니다.
 기기를 **전원 버튼으로 켜거나 충전 케이블을 뽑았을 때**는 SteamVR이 지금처럼 자동으로 켜집니다.
 
 ### 왜 생기는 문제인가요?
@@ -45,11 +45,13 @@ Steam 자동 실행 설정도 설치 전 상태로 되돌아갑니다.
 - 헤드셋 버튼을 눌러 SteamVR을 켜는 기능(Vive 등)은 더 이상 동작하지 않습니다.
 - 판단 기록은 `%LOCALAPPDATA%\SteamVRChargeGuard\launcher.log`에 남습니다. 창의 **로그 보기**로 열 수 있습니다.
 - 1.1.0 이하에서는 PC를 재부팅하면 SteamVR을 한 번 켜기 전까지 기기가 동글에 연결되지 않아 자동 실행이 되지 않았습니다. 1.2.0에서 고쳤습니다.
-- 확인한 기기: Shiftall GripVR VC2, VIVE Tracker 3.0 (Bigscreen Beyond 환경).
+- 확인한 기기 (Bigscreen Beyond 환경):
+  - Shiftall GripVR VC2: 충전 케이블을 꽂으면 저절로 켜짐. 충전 중 켜짐 무시, 전원 버튼·케이블 뽑기로 자동 실행 확인
+  - VIVE Tracker 3.0: 충전해도 저절로 켜지지 않음. 전원 버튼으로 켜면 자동 실행 확인
 
 ## English
 
-Stops SteamVR from starting when a controller or tracker **switches itself on because you plugged it in to charge**.
+Stops SteamVR from starting when a device that **switches itself on when plugged in to charge** (like GripVR) powers up on the charger.
 SteamVR still starts automatically when you **turn a device on with its power button or unplug it from the charger**.
 
 **Why it happens:** Steam watches the wireless dongles even while SteamVR is closed and starts SteamVR as soon as a device connects. Some devices (GripVR, ...) power on by themselves when a charging cable is plugged in.
@@ -60,17 +62,17 @@ Turning Steam's auto-launch off also stops Steam from waking the dongle radios a
 **Install:** download `SteamVRChargeGuard.exe` from [Releases](https://github.com/kir20/SteamVRChargeGuard/releases/latest) and run it (SmartScreen: *More info → Run anyway*; the exe is not code-signed), close SteamVR, click **Install**, then restart Steam once.
 **Uninstall:** run the exe again and click **Uninstall**, or use Windows *Settings → Apps*. Steam's auto-launch setting is restored.
 
-Works with controllers and trackers on USB dongles (Watchman Dongle, Valve VR Radio). Waking SteamVR with a headset button no longer works. Log: `%LOCALAPPDATA%\SteamVRChargeGuard\launcher.log`.
+Works with controllers and trackers on USB dongles (Watchman Dongle, Valve VR Radio). Tested with Shiftall GripVR VC2 (powers on from the charger; charging power-on ignored, power button and unplugging launch) and VIVE Tracker 3.0 (does not power on from the charger; power button launches). Waking SteamVR with a headset button no longer works. Log: `%LOCALAPPDATA%\SteamVRChargeGuard\launcher.log`.
 
 ## 日本語
 
-充電ケーブルを挿しただけでコントローラーやトラッカーの電源が入り、**SteamVR が起動してしまう問題**を防ぎます。
+GripVR のように充電ケーブルを挿すと自動で電源が入るデバイスのせいで、**充電するだけで SteamVR が起動してしまう問題**を防ぎます。
 **電源ボタンで起動したとき・充電ケーブルを抜いたとき**は、これまでどおり SteamVR が自動で起動します。
 
 **インストール:** [Releases](https://github.com/kir20/SteamVRChargeGuard/releases/latest) から `SteamVRChargeGuard.exe` をダウンロードして実行し（SmartScreen が出たら「詳細情報 → 実行」）、SteamVR を終了した状態で **インストール** を押し、Steam を一度再起動してください。
 **アンインストール:** exe をもう一度実行して **アンインストール**、または Windows の「設定 → アプリ」から。Steam の自動起動設定も元に戻ります。
 
-USB ドングル（Watchman Dongle / Valve VR Radio）に接続されたコントローラー・トラッカーが対象です。ヘッドセットのボタンで SteamVR を起動する機能は使えなくなります。
+USB ドングル（Watchman Dongle / Valve VR Radio）に接続されたコントローラー・トラッカーが対象です。ヘッドセットのボタンで SteamVR を起動する機能は使えなくなります。動作確認: Shiftall GripVR VC2（充電で自動的に電源オン。充電中の起動は無視、電源ボタン・ケーブルを抜くと自動起動）、VIVE Tracker 3.0（充電しても電源は入らない。電源ボタンで自動起動）。
 
 Steam の自動起動を切ると、再起動後に Steam がドングルの無線を起こす処理も止まります。そのため SteamVR が終了している間は、このプログラムがその役目を代わりに担います。インストール済み SteamVR の lighthouse ドライバーに入っている watchdog モジュール（Steam が使うものと同じ）を動かしてデバイスが接続できるようにし、SteamVR が起動するとすぐに止めます。1.1.0 以前は、再起動後に一度 SteamVR を起動するまでデバイスが接続できませんでした（1.2.0 で修正）。
 
