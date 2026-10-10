@@ -48,7 +48,7 @@ Steam 자동 실행 설정도 설치 전 상태로 되돌아갑니다.
 Stops SteamVR from starting when a controller or tracker **switches itself on because you plugged it in to charge**.
 SteamVR still starts automatically when you **turn a device on with its power button or unplug it from the charger**.
 
-**Why it happens:** Steam watches the wireless dongles even while SteamVR is closed and starts SteamVR as soon as a device connects. Some devices (GripVR, VIVE Tracker, ...) power on by themselves when a charging cable is plugged in.
+**Why it happens:** Steam watches the wireless dongles even while SteamVR is closed and starts SteamVR as soon as a device connects. Some devices (GripVR, ...) power on by themselves when a charging cable is plugged in.
 
 **How it works:** Steam's own auto-launch is turned off (`power.autoLaunchSteamVROnButtonPress = false`), and this program runs in the background at sign-in. It reads the dongles directly: a few seconds after powering on, a device reports its battery status, which says whether it is charging.
 
