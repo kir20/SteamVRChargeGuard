@@ -10,6 +10,7 @@ namespace ChargeGuard
      *   (no arguments)        install / uninstall window
      *   --run                 background watcher (what the sign-in entry starts)
      *   --run --dry-run       watcher that only logs what it would do
+     *   --radio-host          child of the watcher that keeps the dongle radios awake (RadioWake.cs)
      *   --uninstall           uninstall with a confirmation prompt (Apps & features)
      *   --install --quiet     install without any window; exit code 0 = ok
      *   --uninstall --quiet   uninstall without any window
@@ -26,6 +27,8 @@ namespace ChargeGuard
 
             if (args.Contains("--run"))
                 return Watcher.RunMain(args.Contains("--dry-run"));
+            if (args.Contains("--radio-host"))
+                return RadioWake.ChildMain();
 
             if (args.Contains("--quiet"))
             {

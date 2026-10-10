@@ -70,7 +70,8 @@ namespace ChargeGuard
                 stop.Dispose();
             }
             var waited = Stopwatch.StartNew();
-            while (WatcherRunning() && waited.Elapsed.TotalSeconds < 5) Thread.Sleep(200);
+            // 8 s: the watcher first lets its radio wake-up child release the dongles (up to 5 s)
+            while (WatcherRunning() && waited.Elapsed.TotalSeconds < 8) Thread.Sleep(200);
             if (!WatcherRunning()) return;
 
             int me = Process.GetCurrentProcess().Id;

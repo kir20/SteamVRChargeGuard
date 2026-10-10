@@ -12,7 +12,7 @@ namespace ChargeGuard
     {
         public const string Name = "SteamVR Charge Guard";
         public const string Id = "SteamVRChargeGuard";
-        public const string Version = "1.1.0";
+        public const string Version = "1.2.0";
         public const string ExeName = Id + ".exe";
         public const string RunKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
         public const string UninstallKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\" + Id;

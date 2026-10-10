@@ -31,6 +31,7 @@ namespace ChargeGuard
         const double SilenceGap = 3;        // seconds without reports = link down
         const double RebootGap = 60;        // silence this long (or a turn-off report) before a connection counts as a power-on
         const double DecideTimeout = 12;    // no battery event this long after power-on -> treat as normal power-on
+        const double StartupGrace = 2;      // links seen this soon after we start listening were already up
         const int StartupReportsLogged = 6;
 
         const byte ReportRfWatchman = 0x23, ReportRfWatchmanX2 = 0x24, ReportRfTurnOff = 0x26;
@@ -39,6 +40,7 @@ namespace ChargeGuard
         public readonly string Label;
 
         double lastReport;
+        double listeningSince = -1e9;
         bool turnedOff = true;   // nothing seen yet counts as off
         bool linkUp;
         double connectedAt;
@@ -60,6 +62,9 @@ namespace ChargeGuard
             trusted = false;
             battery = null;
         }
+
+        /// <summary>The watcher just opened this dongle.</summary>
+        public void OnListening(double now) => listeningSince = now;
 
         public void OnSteamVRStarted()
         {
@@ -89,6 +94,13 @@ namespace ChargeGuard
                 {
                     decided = true;
                     Log.Info($"{Label}: link came back after {now - lastReport:0}s (radio dropout, ignored)");
+                }
+                else if (now - listeningSince < StartupGrace)
+                {
+                    // Already connected when the watcher started (e.g. right after an update): not a power-on.
+                    decided = true;
+                    trusted = false;
+                    Log.Info($"{Label}: already connected when the watcher started (not a power-on)");
                 }
                 else
                 {
@@ -182,6 +194,7 @@ namespace ChargeGuard
         readonly object gate = new object();
         readonly Dictionary<string, Dongle> dongles = new Dictionary<string, Dongle>();
         readonly Dictionary<string, Thread> readers = new Dictionary<string, Thread>();
+        readonly RadioWake.Supervisor radio = new RadioWake.Supervisor();
         double lastLaunch = -1e9;
         bool launchPending;
 
@@ -213,6 +226,7 @@ namespace ChargeGuard
             string exe = SteamVR.StartupExe(runtime);
             Log.Info($"launching SteamVR ({why}): {exe}");
             launchPending = true;
+            radio.RequestStop("launching SteamVR");
             try
             {
                 Process.Start(new ProcessStartInfo(exe) { UseShellExecute = true, WorkingDirectory = Path.GetDirectoryName(exe) })?.Dispose();
@@ -237,6 +251,7 @@ namespace ChargeGuard
                 return;
             }
             Log.Info($"{dongle.Label}: listening");
+            lock (gate) dongle.OnListening(Now());
             using (stream)
             {
                 var buffer = new byte[reportLength];
@@ -317,6 +332,9 @@ namespace ChargeGuard
                     EnsureReaders();
                 }
                 CheckSteamVR();
+                bool busy;
+                lock (gate) busy = SteamVRRunning || launchPending;
+                radio.Update(busy);
                 if (now - lastSettingsCheck > 60)
                 {
                     lastSettingsCheck = now;
@@ -332,6 +350,7 @@ namespace ChargeGuard
                     foreach (Dongle d in dongles.Values) d.Tick(now);
                 }
             } while (!stop.WaitOne(1000));
+            radio.StopAndWait();
             Log.Info("watcher stopped");
         }
 
