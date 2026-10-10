@@ -1,0 +1,6 @@
+.venv-build/
+build/
+__pycache__/
+*.pyc
+assets/icon.png
+dist/
