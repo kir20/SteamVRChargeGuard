@@ -2,6 +2,8 @@
 
 [한국어](#한국어) · [English](#english) · [日本語](#日本語)
 
+**⬇ [Download SteamVRChargeGuard.exe](https://github.com/kir20/SteamVRChargeGuard/releases/latest)** (Windows 10/11, SteamVR)
+
 ## 한국어
 
 컨트롤러나 트래커를 **충전하려고 케이블을 꽂았을 뿐인데 SteamVR이 켜지는** 문제를 막아 줍니다.
@@ -24,7 +26,7 @@ Steam은 SteamVR이 꺼져 있어도 무선 동글을 지켜보다가, 기기가
 | 신호가 약해서 잠깐 끊겼다 다시 연결됨 | 무시 |
 
 ### 설치
-1. `SteamVRChargeGuard.exe`를 실행합니다.
+1. [Releases](https://github.com/kir20/SteamVRChargeGuard/releases/latest)에서 `SteamVRChargeGuard.exe`를 받아 실행합니다.
    "Windows의 PC 보호" 창이 뜨면 **추가 정보 → 실행**을 누르세요. 코드 서명이 없는 프로그램이라 나오는 경고입니다.
 2. SteamVR을 끈 상태에서 **설치**를 누릅니다.
 3. **Steam을 한 번 재시작**하면 적용됩니다.
@@ -48,7 +50,7 @@ SteamVR still starts automatically when you **turn a device on with its power bu
 
 **How it works:** Steam's own auto-launch is turned off (`power.autoLaunchSteamVROnButtonPress = false`), and this program runs in the background at sign-in. It reads the dongles directly: a few seconds after powering on, a device reports its battery status, which says whether it is charging.
 
-**Install:** run `SteamVRChargeGuard.exe` (SmartScreen: *More info → Run anyway*; the exe is not code-signed), close SteamVR, click **Install**, then restart Steam once.
+**Install:** download `SteamVRChargeGuard.exe` from [Releases](https://github.com/kir20/SteamVRChargeGuard/releases/latest) and run it (SmartScreen: *More info → Run anyway*; the exe is not code-signed), close SteamVR, click **Install**, then restart Steam once.
 **Uninstall:** run the exe again and click **Uninstall**, or use Windows *Settings → Apps*. Steam's auto-launch setting is restored.
 
 Works with controllers and trackers on USB dongles (Watchman Dongle, Valve VR Radio). Waking SteamVR with a headset button no longer works. Log: `%LOCALAPPDATA%\SteamVRChargeGuard\launcher.log`.
@@ -58,7 +60,7 @@ Works with controllers and trackers on USB dongles (Watchman Dongle, Valve VR Ra
 充電ケーブルを挿しただけでコントローラーやトラッカーの電源が入り、**SteamVR が起動してしまう問題**を防ぎます。
 **電源ボタンで起動したとき・充電ケーブルを抜いたとき**は、これまでどおり SteamVR が自動で起動します。
 
-**インストール:** `SteamVRChargeGuard.exe` を実行し（SmartScreen が出たら「詳細情報 → 実行」）、SteamVR を終了した状態で **インストール** を押し、Steam を一度再起動してください。
+**インストール:** [Releases](https://github.com/kir20/SteamVRChargeGuard/releases/latest) から `SteamVRChargeGuard.exe` をダウンロードして実行し（SmartScreen が出たら「詳細情報 → 実行」）、SteamVR を終了した状態で **インストール** を押し、Steam を一度再起動してください。
 **アンインストール:** exe をもう一度実行して **アンインストール**、または Windows の「設定 → アプリ」から。Steam の自動起動設定も元に戻ります。
 
 USB ドングル（Watchman Dongle / Valve VR Radio）に接続されたコントローラー・トラッカーが対象です。ヘッドセットのボタンで SteamVR を起動する機能は使えなくなります。
@@ -80,3 +82,7 @@ Python 3.10+, dependencies pinned in `requirements-build.txt` (hidapi, psutil, P
 | `src/ui.py`, `src/strings.py` | install window, ko / ja / en text |
 
 Command line: `--run` (watcher), `--run --dry-run`, `--install --quiet`, `--uninstall --quiet`, `--lang ko|ja|en`.
+
+## License
+
+[MIT](LICENSE)
