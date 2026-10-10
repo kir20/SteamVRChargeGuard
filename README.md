@@ -13,7 +13,7 @@
 
 ### 왜 생기는 문제인가요?
 Steam은 SteamVR이 꺼져 있어도 무선 동글을 지켜보다가, 기기가 연결되면 SteamVR을 자동으로 켭니다.
-그런데 GripVR, VIVE Tracker 같은 일부 기기는 충전 케이블을 꽂으면 저절로 전원이 켜지기 때문에, 충전만 하려 해도 SteamVR이 켜집니다.
+그런데 GripVR 같은 일부 기기는 충전 케이블을 꽂으면 저절로 전원이 켜지기 때문에, 충전만 하려 해도 SteamVR이 켜집니다.
 
 ### 어떻게 해결하나요?
 1. Steam 자체의 자동 실행을 끕니다 (`steamvr.vrsettings`의 `power.autoLaunchSteamVROnButtonPress = false`).
