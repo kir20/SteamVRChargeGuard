@@ -71,15 +71,21 @@ USB ドングル（Watchman Dongle / Valve VR Radio）に接続されたコン�
 powershell -ExecutionPolicy Bypass -File build.ps1   # -> dist\SteamVRChargeGuard.exe
 ```
 
-Python 3.10+, dependencies pinned in `requirements-build.txt` (hidapi, psutil, PyInstaller, Pillow for the icon).
+A plain C# / .NET Framework 4.x WinForms program (~80 KB, no dependencies; .NET Framework 4.7.2+ ships with Windows 10 1803+ and 11).
+Building needs the C# compiler from Visual Studio or Visual Studio Build Tools (".NET desktop build tools").
+
+Versions up to 1.0.0 were Python + PyInstaller. That build was flagged by several antivirus engines (e.g. Microsoft `Wacatac.B!ml`), which is a common false positive for PyInstaller one-file executables, so 1.1.0 was rewritten in C#.
 
 | File | Role |
 |---|---|
-| `src/main.py` | entry point, command-line options |
-| `src/watcher.py` | background watcher (dongle reading, charging detection, SteamVR launch) |
-| `src/installer.py` | install / uninstall (copy, registry Run + Apps entry, SteamVR setting) |
-| `src/common.py` | paths, `steamvr.vrsettings` access, process helpers |
-| `src/ui.py`, `src/strings.py` | install window, ko / ja / en text |
+| `src/Program.cs` | entry point, command-line options |
+| `src/Watcher.cs` | background watcher (dongle reading, charging detection, SteamVR launch) |
+| `src/Hid.cs` | Windows HID API: find dongles, read input reports |
+| `src/Installer.cs` | install / uninstall (copy, registry Run + Apps entry, SteamVR setting) |
+| `src/Common.cs` | paths, log, SteamVR location and `steamvr.vrsettings` access |
+| `src/Json.cs` | order- and number-preserving JSON for SteamVR settings files |
+| `src/MainForm.cs`, `src/Strings.cs` | install window, ko / ja / en text |
+| `assets/make_icon.py` | draws `assets/icon.ico` (Pillow; only needed to change the icon) |
 
 Command line: `--run` (watcher), `--run --dry-run`, `--install --quiet`, `--uninstall --quiet`, `--lang ko|ja|en`.
 
